@@ -1,7 +1,9 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
 import android.content.Context;
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
+import com.lamudi.phonefield.R;
+
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -37,7 +39,7 @@ public class PhoneInputLayout extends PhoneField {
   @Override
   protected void prepareView() {
     super.prepareView();
-    mTextInputLayout = (TextInputLayout) findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_til_phone));
+    mTextInputLayout = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_til_phone));
   }
 
   @Override
@@ -52,11 +54,7 @@ public class PhoneInputLayout extends PhoneField {
 
   @Override
   public void setError(String error) {
-    if (error == null || error.length() == 0) {
-      mTextInputLayout.setErrorEnabled(false);
-    } else {
-      mTextInputLayout.setErrorEnabled(true);
-    }
+    mTextInputLayout.setErrorEnabled(error != null && error.length() != 0);
     mTextInputLayout.setError(error);
   }
 

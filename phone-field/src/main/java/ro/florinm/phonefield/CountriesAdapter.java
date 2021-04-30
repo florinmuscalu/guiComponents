@@ -1,4 +1,4 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
+import com.lamudi.phonefield.R;
+
 import java.util.List;
 
 /**
@@ -28,7 +31,7 @@ public class CountriesAdapter extends ArrayAdapter<Country> implements SpinnerAd
     if (convertView == null) {
       convertView = mInflater.inflate(R.layout.spinner_value, parent, false);
     }
-    ImageView imageView = (ImageView) convertView.findViewById(R.id.flag);
+    ImageView imageView = convertView.findViewById(R.id.flag);
     imageView.setImageResource(country.getResId(getContext()));
     return convertView;
   }
@@ -43,9 +46,9 @@ public class CountriesAdapter extends ArrayAdapter<Country> implements SpinnerAd
     if (convertView == null) {
       convertView = mInflater.inflate(R.layout.item_country, parent, false);
       viewHolder = new ViewHolder();
-      viewHolder.mName = (TextView) convertView.findViewById(R.id.name);
-      viewHolder.mDialCode = (TextView) convertView.findViewById(R.id.dial_code);
-      viewHolder.mFlag = (ImageView) convertView.findViewById(R.id.flag);
+      viewHolder.mName = convertView.findViewById(R.id.name);
+      viewHolder.mDialCode = convertView.findViewById(R.id.dial_code);
+      viewHolder.mFlag = convertView.findViewById(R.id.flag);
       convertView.setTag(viewHolder);
     } else {
       viewHolder = (ViewHolder) convertView.getTag();

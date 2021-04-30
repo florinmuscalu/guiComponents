@@ -1,5 +1,6 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+import com.lamudi.phonefield.R;
 
 /**
  * PhoneField is a custom view for phone numbers with the corresponding country flag, and it uses
@@ -71,21 +73,19 @@ public abstract class PhoneField extends LinearLayout {
   /**
    * Prepare view.
    */
+  @SuppressLint("ClickableViewAccessibility")
   protected void prepareView() {
-    mSpinner = (Spinner) findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_flag_spinner));
-    mEditText = (EditText) findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_edittext));
+    mSpinner = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_flag_spinner));
+    mEditText = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_edittext));
 
     if (mSpinner == null || mEditText == null) {
       throw new IllegalStateException("Please provide a valid xml layout");
     }
 
     final CountriesAdapter adapter = new CountriesAdapter(getContext(), Countries.COUNTRIES);
-    mSpinner.setOnTouchListener(new OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        hideKeyboard();
-        return false;
-      }
+    mSpinner.setOnTouchListener((v, event) -> {
+      hideKeyboard();
+      return false;
     });
 
     originalTextWatcher = new TextWatcher() {

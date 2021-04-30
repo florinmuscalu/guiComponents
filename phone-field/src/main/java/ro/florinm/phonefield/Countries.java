@@ -1,4 +1,4 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
 import java.util.ArrayList;
 import java.util.List;

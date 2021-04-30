@@ -1,10 +1,12 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.lamudi.phonefield.R;
 
 /**
  * Implementation of PhoneField that uses an {@link EditText}

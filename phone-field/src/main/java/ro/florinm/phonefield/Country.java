@@ -1,4 +1,4 @@
-package com.lamudi.phonefield;
+package ro.florinm.phonefield;
 
 import android.content.Context;
 import android.content.res.Resources;
