@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-phone-field.iml" filepath="$PROJECT_DIR$/.idea/modules/android-phone-field.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/phone-field/android-phone-field.phone-field.iml" filepath="$PROJECT_DIR$/.idea/modules/phone-field/android-phone-field.phone-field.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/phonefield/android-phone-field.phonefield.iml" filepath="$PROJECT_DIR$/.idea/modules/phonefield/android-phone-field.phonefield.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/android-phone-field.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/android-phone-field.sample.iml" />
     </modules>
   </component>
