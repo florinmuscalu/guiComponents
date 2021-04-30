@@ -20,14 +20,6 @@
         android:layout_marginBottom="16dp"
         />
 
-    <ro.florinm.phonefield.PhoneEditText
-        android:id="@+id/edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        />
-
     <Button
         android:id="@+id/submit_button"
         android:layout_width="match_parent"
