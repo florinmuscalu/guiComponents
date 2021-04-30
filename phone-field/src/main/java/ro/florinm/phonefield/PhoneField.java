@@ -5,7 +5,6 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -15,7 +14,6 @@ import android.widget.Spinner;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
-import com.lamudi.phonefield.R;
 
 /**
  * PhoneField is a custom view for phone numbers with the corresponding country flag, and it uses

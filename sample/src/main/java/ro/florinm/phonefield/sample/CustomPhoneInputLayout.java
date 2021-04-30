@@ -2,8 +2,8 @@ package ro.florinm.phonefield.sample;
 
 import android.content.Context;
 import android.util.AttributeSet;
+
 import ro.florinm.phonefield.PhoneInputLayout;
-import com.lamudi.phonefield.sample.R;
 
 /**
  * Custom PhoneInputLayout that allows users

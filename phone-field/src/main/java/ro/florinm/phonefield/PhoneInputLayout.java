@@ -1,12 +1,11 @@
 package ro.florinm.phonefield;
 
 import android.content.Context;
-import com.google.android.material.textfield.TextInputLayout;
-import com.lamudi.phonefield.R;
-
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * Implementation of PhoneField that uses {@link TextInputLayout}

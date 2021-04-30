@@ -1,14 +1,12 @@
 package ro.florinm.phonefield.sample;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import ro.florinm.phonefield.PhoneEditText;
 import ro.florinm.phonefield.PhoneInputLayout;
-import com.lamudi.phonefield.sample.R;
 
 public class MainActivity extends AppCompatActivity {
 

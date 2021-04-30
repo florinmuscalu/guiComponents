@@ -8,9 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-
-import com.lamudi.phonefield.R;
-
 import java.util.List;
 
 /**
