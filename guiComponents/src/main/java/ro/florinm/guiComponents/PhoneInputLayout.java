@@ -1,4 +1,4 @@
-package ro.florinm.phonefield;
+package ro.florinm.guiComponents;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,12 +19,6 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
-/**
- * PhoneField is a custom view for phone numbers with the corresponding country flag, and it uses
- * libphonenumber to validate the phone number.
- *
- * Created by Ismail on 5/6/16.
- */
 public class PhoneInputLayout extends LinearLayout {
 
   private TextInputLayout mTextInputLayout;

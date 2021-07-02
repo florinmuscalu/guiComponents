@@ -1,4 +1,4 @@
-package ro.florinm.phonefield;
+package ro.florinm.guiComponents;
 
 import java.util.ArrayList;
 import java.util.List;

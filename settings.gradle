@@ -1,1 +1,1 @@
-include ':phonefield', ':sample'
+include ':guiComponents', ':sample'

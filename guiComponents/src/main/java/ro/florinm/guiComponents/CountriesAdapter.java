@@ -1,4 +1,4 @@
-package ro.florinm.phonefield;
+package ro.florinm.guiComponents;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,6 @@ import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import java.util.List;
-
-/**
- * Adapter for the countries list spinner
- * Created by Ismail on 5/6/16.
- */
 public class CountriesAdapter extends ArrayAdapter<Country> implements SpinnerAdapter {
 
   private final LayoutInflater mInflater;

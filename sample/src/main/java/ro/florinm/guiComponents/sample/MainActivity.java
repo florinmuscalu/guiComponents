@@ -1,4 +1,4 @@
-package ro.florinm.phonefield.sample;
+package ro.florinm.guiComponents.sample;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import ro.florinm.phonefield.PhoneInputLayout;
+import ro.florinm.guiComponents.PhoneInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 

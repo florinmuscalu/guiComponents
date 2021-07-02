@@ -1,13 +1,8 @@
-package ro.florinm.phonefield;
+package ro.florinm.guiComponents;
 
 import android.content.Context;
 import android.content.res.Resources;
 import java.util.Locale;
-
-/**
- * Country object that holds the country iso2 code, name, and dial code.
- * @author Ismail Almetwally
- */
 public class Country {
 
   private final String mCode;
