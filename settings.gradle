@@ -1,1 +1,1 @@
-include ':guiComponents', ':sample'
+include ':gui', ':sample'

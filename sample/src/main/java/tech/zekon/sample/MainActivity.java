@@ -1,4 +1,4 @@
-package ro.florinm.guiComponents.sample;
+package tech.zekon.sample;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -6,7 +6,8 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import ro.florinm.guiComponents.PhoneInputLayout;
+import tech.zekon.phonefield.PhoneInputLayout;
+
 
 public class MainActivity extends AppCompatActivity {
 

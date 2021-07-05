@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/guiComponents.iml" filepath="$PROJECT_DIR$/.idea/modules/guiComponents.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/phonefield/guiComponents.guiComponents.iml" filepath="$PROJECT_DIR$/.idea/modules/phonefield/guiComponents.guiComponents.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.iml" filepath="$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.iml" />
     </modules>
   </component>

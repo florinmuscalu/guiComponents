@@ -5,7 +5,7 @@ android {
   buildToolsVersion "30.0.3"
 
   defaultConfig {
-    applicationId "ro.florinm.phonefield.sample"
+    applicationId "tech.zekon.sample"
     minSdkVersion 26
     targetSdkVersion 30
     versionCode 1
@@ -21,5 +21,5 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':guiComponents')
+    implementation project(':gui')
 }

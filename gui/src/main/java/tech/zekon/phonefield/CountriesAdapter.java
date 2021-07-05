@@ -1,4 +1,4 @@
-package ro.florinm.guiComponents;
+package tech.zekon.phonefield;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+
 import java.util.List;
+
 public class CountriesAdapter extends ArrayAdapter<Country> implements SpinnerAdapter {
 
   private final LayoutInflater mInflater;

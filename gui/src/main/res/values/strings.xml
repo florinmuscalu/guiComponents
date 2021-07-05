@@ -1,0 +1,8 @@
+<resources>
+  <string name="app_name">PhoneField</string>
+
+  <string name="flag_description">flag</string>
+  <string name="tech_zekon_guiComponents_phonefield_edittext">phone_edit_text</string>
+  <string name="tech_zekon_guiComponents_phonefield_flag_spinner">flag_spinner</string>
+  <string name="tech_zekon_guiComponents_phonefield_til_phone">til_phone</string>
+</resources>

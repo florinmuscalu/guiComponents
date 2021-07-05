@@ -1,18 +1,18 @@
-package ro.florinm.guiComponents;
+package tech.zekon.phonefield;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -20,17 +20,10 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 public class PhoneInputLayout extends LinearLayout {
-
   private TextInputLayout mTextInputLayout;
-
-  private Spinner mSpinner;
-
   private EditText mEditText;
-
   private Country mCountry;
-
   private final PhoneNumberUtil mPhoneUtil = PhoneNumberUtil.getInstance();
-
   private int mDefaultCountryPosition = 0;
 
   private TextWatcher originalTextWatcher;
@@ -56,18 +49,13 @@ public class PhoneInputLayout extends LinearLayout {
    */
   @SuppressLint("ClickableViewAccessibility")
   protected void prepareView() {
-    mSpinner = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_flag_spinner));
-    mEditText = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_edittext));
+    mEditText = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_phonefield_edittext));
 
-    if (mSpinner == null || mEditText == null) {
+    if (mEditText == null) {
       throw new IllegalStateException("Please provide a valid xml layout");
     }
 
     final CountriesAdapter adapter = new CountriesAdapter(getContext(), Countries.COUNTRIES);
-    mSpinner.setOnTouchListener((v, event) -> {
-      hideKeyboard();
-      return false;
-    });
 
     originalTextWatcher = new TextWatcher() {
       @Override
@@ -83,8 +71,9 @@ public class PhoneInputLayout extends LinearLayout {
       public void afterTextChanged(Editable s) {
         String rawNumber = s.toString();
         if (rawNumber.isEmpty()) {
-          mSpinner.setSelection(mDefaultCountryPosition);
-        } else {
+          mEditText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+        else {
           if (rawNumber.startsWith("00")) {
             rawNumber = rawNumber.replaceFirst("00", "+");
             mEditText.removeTextChangedListener(this);
@@ -104,20 +93,7 @@ public class PhoneInputLayout extends LinearLayout {
     };
 
     mEditText.addTextChangedListener(originalTextWatcher);
-
-    mSpinner.setAdapter(adapter);
-    mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-      @Override
-      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        mCountry = adapter.getItem(position);
-      }
-
-      @Override
-      public void onNothingSelected(AdapterView<?> parent) {
-        mCountry = null;
-      }
-    });
-    mTextInputLayout = findViewWithTag(getResources().getString(R.string.com_lamudi_phonefield_til_phone));
+    mTextInputLayout = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_phonefield_til_phone));
   }
 
   public void addTextChangedListener(TextWatcher textWatcher, boolean removeOriginal) {
@@ -125,15 +101,6 @@ public class PhoneInputLayout extends LinearLayout {
     if (removeOriginal) {
       mEditText.removeTextChangedListener(originalTextWatcher);
     }
-  }
-
-  /**
-   * Gets spinner.
-   *
-   * @return the spinner
-   */
-  public Spinner getSpinner() {
-    return mSpinner;
   }
 
   /**
@@ -148,7 +115,7 @@ public class PhoneInputLayout extends LinearLayout {
   /**
    * Checks whether the entered phone number is valid or not.
    *
-   * @return  a boolean that indicates whether the number is of a valid pattern
+   * @return a boolean that indicates whether the number is of a valid pattern
    */
   public boolean isValid() {
     try {
@@ -188,7 +155,8 @@ public class PhoneInputLayout extends LinearLayout {
       if (country.getCode().equalsIgnoreCase(countryCode)) {
         mCountry = country;
         mDefaultCountryPosition = i;
-        mSpinner.setSelection(i);
+        Drawable img = ContextCompat.getDrawable(getContext(), country.getResId(getContext()));
+        mEditText.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
       }
     }
   }
@@ -198,7 +166,9 @@ public class PhoneInputLayout extends LinearLayout {
       Country country = Countries.COUNTRIES.get(i);
       if (country.getDialCode() == dialCode) {
         mCountry = country;
-        mSpinner.setSelection(i);
+        Drawable img = ContextCompat.getDrawable(getContext(), country.getResId(getContext()));
+        mEditText.setCompoundDrawablesWithIntrinsicBounds(img, null, null, null);
+
       }
     }
   }
@@ -221,7 +191,7 @@ public class PhoneInputLayout extends LinearLayout {
 
   private void hideKeyboard() {
     ((InputMethodManager) getContext().getSystemService(
-        Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+            Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
   }
 
   protected void updateLayoutAttributes() {

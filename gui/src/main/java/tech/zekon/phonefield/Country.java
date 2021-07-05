@@ -1,14 +1,11 @@
-package ro.florinm.guiComponents;
+package tech.zekon.phonefield;
 
 import android.content.Context;
 import android.content.res.Resources;
 import java.util.Locale;
 public class Country {
-
   private final String mCode;
-
   private final String mName;
-
   private final int mDialCode;
 
   public Country(String code, String name, int dialCode) {
