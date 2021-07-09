@@ -6,15 +6,20 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class FractionButton  extends LinearLayout {
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+public class FractionButton  extends ConstraintLayout implements View.OnClickListener {
     private TextView mInteger, mNumerator, mDenominator;
     private boolean isCheckbox = false;
     private String Text, Numerator, Denominator;
+    private boolean isChecked = false;
 
     public FractionButton(Context context) {
         this(context, null);
@@ -33,8 +38,8 @@ public class FractionButton  extends LinearLayout {
 
     protected void updateLayoutAttributes() {
         setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        setGravity(Gravity.TOP);
-        setOrientation(HORIZONTAL);
+        //setGravity(Gravity.TOP);
+        //setOrientation(HORIZONTAL);
     }
 
     public int getLayoutResId() {
@@ -63,6 +68,7 @@ public class FractionButton  extends LinearLayout {
         ta.recycle();
         ta = getContext().obtainStyledAttributes(attrSet, R.styleable.FractionButton);
         isCheckbox = ta.getBoolean(R.styleable.FractionButton_isCheckbox, false);
+        isChecked = ta.getBoolean(R.styleable.FractionButton_Checked, false);
         Text = ta.getString(R.styleable.FractionButton_Text);
         if (Text == null) Text = "";
         Numerator = ta.getString(R.styleable.FractionButton_Numerator);
@@ -80,10 +86,14 @@ public class FractionButton  extends LinearLayout {
         mDenominator.setTextSize(textSize);
 
         setCheckbox(isCheckbox);
+        setChecked(isChecked);
 
         setText(Text);
         setNumerator(Numerator);
         setDenominator(Denominator);
+
+        this.setClickable(true);
+        this.setOnClickListener(this);
     }
 
     public TextView getTextView() {
@@ -142,5 +152,24 @@ public class FractionButton  extends LinearLayout {
         mDenominator.setText(Denominator);
         if (Denominator.isEmpty()) mDenominator.setVisibility(GONE);
         else mDenominator.setVisibility(VISIBLE);
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+        if (!isCheckbox) return;
+        ImageView img = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
+        if (isChecked)
+            img.setImageResource(R.drawable.checked);
+        else
+            img.setImageResource(R.drawable.unchecked);
+    }
+
+    @Override
+    public void onClick(View v) {
+        setChecked(!isChecked);
     }
 }
