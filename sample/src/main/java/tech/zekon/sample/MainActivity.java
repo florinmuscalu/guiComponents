@@ -6,7 +6,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import tech.zekon.phonefield.PhoneInputLayout;
+import tech.zekon.gui.AppRate;
+import tech.zekon.gui.FractionButton;
+import tech.zekon.gui.PhoneInputLayout;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    //final FractionButton fb = findViewById(R.id.fb);
+    //fb.setNumerator("6");
+    //fb.setDenominator("");
 
     final PhoneInputLayout phoneInputLayout = findViewById(R.id.phone_input_layout);
 
@@ -45,5 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, R.string.invalid_phone_number, Toast.LENGTH_LONG).show();
       }
     });
+
+    AppRate.Start(this, "Sample App", "tech.zekon.sample", 0, 0);
   }
 }

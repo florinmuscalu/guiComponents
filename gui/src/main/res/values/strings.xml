@@ -5,4 +5,8 @@
   <string name="tech_zekon_guiComponents_phonefield_edittext">phone_edit_text</string>
   <string name="tech_zekon_guiComponents_phonefield_flag_spinner">flag_spinner</string>
   <string name="tech_zekon_guiComponents_phonefield_til_phone">til_phone</string>
+  <string name="tech_zekon_guiComponents_FractionButton_integer">integer</string>
+  <string name="tech_zekon_guiComponents_FractionButton_numerator">numerator</string>
+  <string name="tech_zekon_guiComponents_FractionButton_denominator">denominator</string>
+  <string name="tech_zekon_guiComponents_FractionButton_checkbox">checkbox</string>
 </resources>

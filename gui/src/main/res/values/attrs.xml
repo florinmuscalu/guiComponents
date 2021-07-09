@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <declare-styleable name="FractionButton">
+        <attr name="isCheckbox" format="boolean" />
+        <attr name="Text" format="string" />
+        <attr name="Numerator" format="string" />
+        <attr name="Denominator" format="string" />
+    </declare-styleable>
+</resources>
