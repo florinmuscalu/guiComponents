@@ -2,12 +2,14 @@ package tech.zekon.gui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,6 +76,12 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         mNumerator.setTextColor(textColor);
         mDenominator.setTextColor(textColor);
 
+
+        int[][] states = {{android.R.attr.state_checked}, {}};
+        int[] colors = {textColor, textColor};
+        CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
+        c.setButtonTintList(new ColorStateList(states, colors));
+
         mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mNumerator.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mDenominator.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
@@ -112,12 +120,12 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
 
     public void setCheckbox(boolean checkbox) {
         isCheckbox = checkbox;
-        ImageView img = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
+        CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
         if (isCheckbox) {
-            img.setVisibility(VISIBLE);
+            c.setVisibility(VISIBLE);
         }
         else {
-            img.setVisibility(GONE);
+            c.setVisibility(GONE);
         }
     }
 
@@ -161,11 +169,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     public void setChecked(boolean checked) {
         isChecked = checked;
         if (!isCheckbox) return;
-        ImageView img = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
-        if (isChecked)
-            img.setImageResource(R.drawable.checked);
-        else
-            img.setImageResource(R.drawable.unchecked);
+        CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
+        c.setChecked(isChecked);
     }
 
     @Override
