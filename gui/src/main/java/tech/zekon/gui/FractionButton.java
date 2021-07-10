@@ -18,6 +18,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     private boolean isCheckbox = false;
     private String Text, Numerator, Denominator;
     private boolean isChecked = false;
+    private OnClickListener _wrappedOnClickListener;
+    private int overlapPercent;
 
     public FractionButton(Context context) {
         this(context, null);
@@ -65,6 +67,7 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         if (Denominator == null) Denominator = "";
         int textColor = ta.getColor(R.styleable.FractionButton_android_textColor, Color.BLACK);
         float textSize = ta.getDimension(R.styleable.FractionButton_android_textSize, 20);
+        overlapPercent = ta.getInt(R.styleable.FractionButton_overlapPercent, 20);
         ta.recycle();
 
         mText.setTextColor(textColor);
@@ -83,7 +86,12 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         setDenominator(Denominator);
 
         this.setClickable(true);
-        this.setOnClickListener(this);
+        super.setOnClickListener(this);
+
+        if (mDenominator.getVisibility() == VISIBLE) {
+            mNumerator.setTranslationY(textSize/(100f/overlapPercent));
+            mDenominator.setTranslationY(-textSize/(100f/overlapPercent));
+        }
     }
 
     public TextView getTextView() {
@@ -120,6 +128,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     public void setText(String strInteger) {
         this.Text = strInteger;
         mText.setText(strInteger);
+        if (Text.isEmpty()) mText.setVisibility(GONE);
+        else mText.setVisibility(VISIBLE);
     }
 
     public String getNumerator() {
@@ -161,5 +171,19 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     @Override
     public void onClick(View v) {
         setChecked(!isChecked);
+        if (_wrappedOnClickListener != null) _wrappedOnClickListener.onClick(v);
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener l) {
+        _wrappedOnClickListener = l;
+    }
+
+    public int getOverlapPercent() {
+        return overlapPercent;
+    }
+
+    public void setOverlapPercent(int overlapPercent) {
+        this.overlapPercent = overlapPercent;
     }
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <declare-styleable name="FractionButton">
-        <attr name="isCheckbox" format="boolean" />
-        <attr name="Checked" format="boolean" />
-        <attr name="Text" format="string" />
-        <attr name="Numerator" format="string" />
-        <attr name="Denominator" format="string" />
+        <attr name="isCheckbox" format="boolean" default = "true"/>
+        <attr name="Checked" format="boolean" default = "false"/>
+        <attr name="Text" format="string" default = "Maj"/>
+        <attr name="Numerator" format="string" default = "5"/>
+        <attr name="Denominator" format="string" default = "3"/>
         <attr name="android:textSize" />
         <attr name="android:textColor" />
+        <attr name="overlapPercent" format="integer" default="20" />
     </declare-styleable>
 </resources>
