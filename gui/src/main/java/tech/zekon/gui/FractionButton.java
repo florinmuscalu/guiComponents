@@ -16,7 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 public class FractionButton  extends ConstraintLayout implements View.OnClickListener {
     private TextView mText, mNumerator, mDenominator;
     private boolean isCheckbox = false;
-    private String Text, Numerator, Denominator;
+    private String text, Numerator, Denominator;
     private boolean isChecked = false;
     private OnClickListener _wrappedOnClickListener;
     private int overlapPercent;
@@ -59,8 +59,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         TypedArray ta = getContext().obtainStyledAttributes(attrSet, R.styleable.FractionButton);
         isCheckbox = ta.getBoolean(R.styleable.FractionButton_isCheckbox, false);
         isChecked = ta.getBoolean(R.styleable.FractionButton_Checked, false);
-        Text = ta.getString(R.styleable.FractionButton_Text);
-        if (Text == null) Text = "";
+        text = ta.getString(R.styleable.FractionButton_android_text);
+        if (text == null) text = "";
         Numerator = ta.getString(R.styleable.FractionButton_Numerator);
         if (Numerator == null) Numerator = "";
         Denominator = ta.getString(R.styleable.FractionButton_Denominator);
@@ -81,7 +81,7 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         setCheckbox(isCheckbox);
         setChecked(isChecked);
 
-        setText(Text);
+        setText(text);
         setNumerator(Numerator);
         setDenominator(Denominator);
 
@@ -122,13 +122,13 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     }
 
     public String getText() {
-        return Text;
+        return text;
     }
 
     public void setText(String strInteger) {
-        this.Text = strInteger;
+        this.text = strInteger;
         mText.setText(strInteger);
-        if (Text.isEmpty()) mText.setVisibility(GONE);
+        if (text.isEmpty()) mText.setVisibility(GONE);
         else mText.setVisibility(VISIBLE);
     }
 
