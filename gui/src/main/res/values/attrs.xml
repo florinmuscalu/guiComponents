@@ -6,5 +6,7 @@
         <attr name="Text" format="string" />
         <attr name="Numerator" format="string" />
         <attr name="Denominator" format="string" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
     </declare-styleable>
 </resources>
