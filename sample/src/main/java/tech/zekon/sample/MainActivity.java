@@ -52,6 +52,6 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    AppRate.Start(this, "Sample App", "tech.zekon.sample", 0, 0);
+    //AppRate.Start(this, 0,"Sample App", "tech.zekon.sample", 0, 0);
   }
 }

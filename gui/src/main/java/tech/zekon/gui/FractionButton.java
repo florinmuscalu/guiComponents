@@ -169,11 +169,15 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
 
     public void setChecked(boolean checked) {
         isChecked = checked;
-        getBackground().setColorFilter(null);
+        try {
+            getBackground().setColorFilter(null);
+        } catch (Exception ignored) {}
         if (!isCheckbox) return;
         CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
         c.setChecked(isChecked);
-        if (isChecked) getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
+        try {
+            if (isChecked) getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
+        } catch (Exception ignored) {}
     }
 
     @Override

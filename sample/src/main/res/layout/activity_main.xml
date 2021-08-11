@@ -23,7 +23,7 @@
         android:id="@+id/fb"
         android:layout_width="154dp"
         android:layout_height="100dp"
-        app:Text="Maj"
+        android:text="Maj"
         app:isCheckbox="true" />
 
     <Button
