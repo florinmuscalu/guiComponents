@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -168,9 +169,11 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+        getBackground().setColorFilter(null);
         if (!isCheckbox) return;
         CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
         c.setChecked(isChecked);
+        if (isChecked) getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
     }
 
     @Override
