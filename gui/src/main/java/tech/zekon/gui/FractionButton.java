@@ -5,15 +5,19 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.ViewUtils;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class FractionButton  extends ConstraintLayout implements View.OnClickListener {
@@ -83,9 +87,31 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
         c.setButtonTintList(new ColorStateList(states, colors));
 
-        mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mNumerator.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mDenominator.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+
+
+        ViewTreeObserver viewTreeObserver = getViewTreeObserver();
+        if (viewTreeObserver.isAlive()) {
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    ConstraintLayout view = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_view));
+                    int w = getWidth() - getPaddingStart() - getPaddingEnd() - mText.getLeft() - view.getPaddingStart() - view.getPaddingEnd();
+                    int w2 = mNumerator.getWidth();
+                    if (mDenominator.getWidth() > w2) w2 = mDenominator.getWidth();
+                    w = w - w2;
+                    if (mText.getWidth() > w) {
+                        correctWidth(mText, w);
+                        //float scale = (1.0f * w) / mText.getWidth();
+                        //scale = 0.5f;
+                        //mText.setTextSize(TypedValue.COMPLEX_UNIT_PX, scale * textSize);
+                    }
+                }
+            });
+        }
 
         setCheckbox(isCheckbox);
         setChecked(isChecked);
@@ -101,6 +127,27 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
             mNumerator.setTranslationY(textSize/(100f/overlapPercent));
             mDenominator.setTranslationY(-textSize/(100f/overlapPercent));
         }
+    }
+
+    public void correctWidth(TextView textView, int desiredWidth)
+    {
+        Paint paint = new Paint();
+        Rect bounds = new Rect();
+
+        paint.setTypeface(textView.getTypeface());
+        float textSize = textView.getTextSize();
+        paint.setTextSize(textSize);
+        String text = textView.getText().toString();
+        paint.getTextBounds(text, 0, text.length(), bounds);
+
+        while (bounds.width() > desiredWidth)
+        {
+            textSize--;
+            paint.setTextSize(textSize);
+            paint.getTextBounds(text, 0, text.length(), bounds);
+        }
+
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 
     public TextView getTextView() {

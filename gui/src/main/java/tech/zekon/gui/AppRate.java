@@ -27,7 +27,7 @@ public class AppRate {
         }
         editor.apply();
 
-        if (launch_count >= LaunchesUntilPrompt || System.currentTimeMillis() >= date_firstLaunch + (DaysUntilPrompt * 24 * 60 * 60 * 1000)) {
+        if (launch_count >= LaunchesUntilPrompt || System.currentTimeMillis() >= date_firstLaunch + ((long) DaysUntilPrompt * 24 * 60 * 60 * 1000)) {
             showRateDialog(mContext, theme, AppTitle, PackageName);
         }
     }
@@ -38,7 +38,7 @@ public class AppRate {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, theme);
         builder.setMessage("If you enjoy using " + AppTitle + ", please take a moment to rate it. Thanks for your support!")
-                .setPositiveButton("Rate " + AppTitle, (dialog, id) -> {
+                .setPositiveButton("Rate", (dialog, id) -> {
                     mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PackageName)));
                     editor.putBoolean("dontshowagain", true);
                     editor.apply();
