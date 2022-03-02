@@ -1,10 +1,13 @@
 package tech.zekon.gui;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class AppRate {
     private static boolean AlreadyRan = false;
@@ -37,14 +40,24 @@ public class AppRate {
         SharedPreferences.Editor editor = prefs.edit();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext, theme);
-        builder.setMessage("If you enjoy using " + AppTitle + ", please take a moment to rate it. Thanks for your support!")
+        builder.setCancelable(false);
+        builder.setMessage("If you enjoy using this app please take a moment to rate it. Thanks for your support!")
                 .setPositiveButton("Rate", (dialog, id) -> {
-                    mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PackageName)));
+                    try {
+                        mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + PackageName)));
+                    } catch (Exception ignored) {
+                        Snackbar snack;
+                        snack = Snackbar.make(mContext.findViewById(android.R.id.content), "No appstore found!", Snackbar.LENGTH_SHORT);
+                        snack.setTextColor(Color.WHITE);
+                        snack.setBackgroundTint(Color.rgb(0xf0, 0, 0x37));
+                        snack.setBackgroundTintMode(PorterDuff.Mode.SRC);
+                        snack.show();
+                    }
                     editor.putBoolean("dontshowagain", true);
                     editor.apply();
                     dialog.dismiss();
                 })
-                .setNeutralButton("Remind me later", (dialog, which) -> {
+                .setNeutralButton("Later", (dialog, which) -> {
                     //Reset all details
                     editor.putLong("launch_count", 1);
                     long date_firstLaunch = System.currentTimeMillis();
@@ -52,7 +65,7 @@ public class AppRate {
                     editor.apply();
                     dialog.dismiss();
                 })
-                .setNegativeButton("No, thanks", (dialog, id) -> {
+                .setNegativeButton("No thanks", (dialog, id) -> {
                     editor.putBoolean("dontshowagain", true);
                     editor.apply();
                     dialog.dismiss();

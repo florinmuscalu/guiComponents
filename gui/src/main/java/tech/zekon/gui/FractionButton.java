@@ -139,9 +139,10 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         paint.setTextSize(textSize);
         String text = textView.getText().toString();
         paint.getTextBounds(text, 0, text.length(), bounds);
-
-        while (bounds.width() > desiredWidth)
+        int i = 0;
+        while (i < 50 && bounds.width() > desiredWidth)
         {
+            i++;
             textSize--;
             paint.setTextSize(textSize);
             paint.getTextBounds(text, 0, text.length(), bounds);
