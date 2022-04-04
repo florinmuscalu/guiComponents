@@ -14,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.ViewUtils;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class FractionButton  extends ConstraintLayout implements View.OnClickListener {
