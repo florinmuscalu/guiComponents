@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/guiComponents.iml" filepath="$PROJECT_DIR$/.idea/modules/guiComponents.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.iml" filepath="$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gui/guiComponents.gui.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/sample/guiComponents.sample.unitTest.iml" />
     </modules>
   </component>
 </project>

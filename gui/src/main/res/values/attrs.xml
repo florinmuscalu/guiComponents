@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="FractionButton">
         <attr name="isCheckbox" format="boolean"/>
+        <attr name="showHelpButton" format="boolean"/>
         <attr name="Checked" format="boolean"/>
         <attr name="android:text"/>
         <attr name="Numerator" format="string"/>

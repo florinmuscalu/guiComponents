@@ -8,11 +8,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -20,10 +22,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class FractionButton  extends ConstraintLayout implements View.OnClickListener {
     private TextView mText, mNumerator, mDenominator;
+    private Button button;
     private boolean isCheckbox = false;
     private String text, Numerator, Denominator;
     private boolean isChecked = false;
+    private boolean showHelpButton = false;
     private OnClickListener _wrappedOnClickListener;
+    private OnClickListener _wrappedOnClickHelp = null;
     private int overlapPercent;
 
     public FractionButton(Context context) {
@@ -56,13 +61,17 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         mText = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_integer));
         mNumerator = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_numerator));
         mDenominator = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_denominator));
-
+        button = findViewWithTag("Frac_button");
+        button.setOnClickListener(view -> {
+            if (_wrappedOnClickHelp != null) _wrappedOnClickHelp.onClick(view);
+        });
         if (mText == null || mNumerator == null || mDenominator == null) {
             throw new IllegalStateException("Please provide a valid xml layout");
         }
 
         TypedArray ta = getContext().obtainStyledAttributes(attrSet, R.styleable.FractionButton);
         isCheckbox = ta.getBoolean(R.styleable.FractionButton_isCheckbox, false);
+        showHelpButton = ta.getBoolean(R.styleable.FractionButton_showHelpButton, false);
         isChecked = ta.getBoolean(R.styleable.FractionButton_Checked, false);
         text = ta.getString(R.styleable.FractionButton_android_text);
         if (text == null) text = "";
@@ -110,7 +119,7 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
                 }
             });
         }
-
+        setShowHelpButton(showHelpButton);
         setCheckbox(isCheckbox);
         setChecked(isChecked);
 
@@ -213,16 +222,35 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         return isChecked;
     }
 
+    public boolean showHelpButton() {
+        return showHelpButton;
+    }
+
+    public void setShowHelpButton(boolean checked) {
+        showHelpButton = checked;
+        if (showHelpButton) {
+            button.setVisibility(VISIBLE);
+            Drawable d = getBackground().getConstantState().newDrawable().mutate();
+            button.setBackground(d);
+        } else {
+            button.setVisibility(GONE);
+        }
+    }
+
     public void setChecked(boolean checked) {
         isChecked = checked;
         try {
             getBackground().setColorFilter(null);
+            button.getBackground().setColorFilter(Color.rgb(10, 10, 10), PorterDuff.Mode.ADD);
         } catch (Exception ignored) {}
         if (!isCheckbox) return;
         CheckBox c = findViewWithTag(getResources().getString(R.string.tech_zekon_guiComponents_FractionButton_checkbox));
         c.setChecked(isChecked);
         try {
-            if (isChecked) getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
+            if (isChecked) {
+                getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
+                button.getBackground().setColorFilter(Color.rgb(255, 110, 81), PorterDuff.Mode.SRC);
+            }
         } catch (Exception ignored) {}
     }
 
@@ -235,6 +263,10 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     @Override
     public void setOnClickListener(OnClickListener l) {
         _wrappedOnClickListener = l;
+    }
+
+    public void setOnHelpClick(OnClickListener l) {
+        _wrappedOnClickHelp = l;
     }
 
     public int getOverlapPercent() {
