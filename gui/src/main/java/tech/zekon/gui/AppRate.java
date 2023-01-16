@@ -8,6 +8,11 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.OnCompleteListener;
+import com.google.android.play.core.tasks.Task;
 
 public class AppRate {
     private static boolean AlreadyRan = false;
@@ -31,8 +36,33 @@ public class AppRate {
         editor.apply();
 
         if (launch_count >= LaunchesUntilPrompt || System.currentTimeMillis() >= date_firstLaunch + ((long) DaysUntilPrompt * 24 * 60 * 60 * 1000)) {
-            showRateDialog(mContext, theme, AppTitle, PackageName);
+            //showRateDialog(mContext, theme, AppTitle, PackageName);
+            defaultRateDialog(mContext);
         }
+    }
+
+    public static void defaultRateDialog(final Activity mContext) {
+        ReviewManager manager = ReviewManagerFactory.create(mContext);
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+            @Override
+            public void onComplete(Task<ReviewInfo> task) {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    Task<Void> launch = manager.launchReviewFlow(mContext, reviewInfo);
+                    launch.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(Task<Void> task) {
+                            // The flow has finished. The API does not indicate whether the user
+                            // reviewed or not, or even whether the review dialog was shown. Thus, no
+                            // matter the result, we continue our app flow.
+                        }
+                    });
+                } else {
+                    // There was some problem, continue regardless of the result.
+                }
+            }
+        });
     }
 
     public static void showRateDialog(final Activity mContext, int theme, String AppTitle, String PackageName) {
