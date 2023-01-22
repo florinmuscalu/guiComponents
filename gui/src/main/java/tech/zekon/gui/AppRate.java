@@ -17,7 +17,7 @@ import com.google.android.play.core.tasks.Task;
 public class AppRate {
     private static boolean AlreadyRan = false;
 
-    public static void Start(Activity mContext, int theme, String AppTitle, String PackageName, int DaysUntilPrompt, int LaunchesUntilPrompt) {
+    public static void Start(Activity mContext, int DaysUntilPrompt, int LaunchesUntilPrompt) {
         if (AlreadyRan) return;
         AlreadyRan = true;
         SharedPreferences prefs = mContext.getSharedPreferences("AppRate", 0);
@@ -41,26 +41,38 @@ public class AppRate {
         }
     }
 
-    public static void defaultRateDialog(final Activity mContext) {
+    public static void Start(Activity mContext) {
         ReviewManager manager = ReviewManagerFactory.create(mContext);
         Task<ReviewInfo> request = manager.requestReviewFlow();
-        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
-            @Override
-            public void onComplete(Task<ReviewInfo> task) {
-                if (task.isSuccessful()) {
-                    ReviewInfo reviewInfo = task.getResult();
-                    Task<Void> launch = manager.launchReviewFlow(mContext, reviewInfo);
-                    launch.addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(Task<Void> task) {
-                            // The flow has finished. The API does not indicate whether the user
-                            // reviewed or not, or even whether the review dialog was shown. Thus, no
-                            // matter the result, we continue our app flow.
-                        }
-                    });
-                } else {
-                    // There was some problem, continue regardless of the result.
-                }
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ReviewInfo reviewInfo = task.getResult();
+                Task<Void> launch = manager.launchReviewFlow(mContext, reviewInfo);
+                launch.addOnCompleteListener(task1 -> {});
+            }
+        });
+    }
+
+    public static void defaultRateDialog(final Activity mContext) {
+        SharedPreferences prefs = mContext.getSharedPreferences("AppRate", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        ReviewManager manager = ReviewManagerFactory.create(mContext);
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ReviewInfo reviewInfo = task.getResult();
+                Task<Void> launch = manager.launchReviewFlow(mContext, reviewInfo);
+                launch.addOnCompleteListener(task1 -> {
+                    editor.putBoolean("dontshowagain", true);
+                    editor.apply();
+                });
+            } else {
+                //Reset all details
+                editor.putLong("launch_count", 1);
+                long date_firstLaunch = System.currentTimeMillis();
+                editor.putLong("date_firstlaunch", date_firstLaunch);
+                editor.apply();
             }
         });
     }
