@@ -4,8 +4,6 @@ plugins {
 
 android {
   namespace 'tech.zekon.gui'
-  compileSdkVersion 34
-  buildToolsVersion '34.0.0'
 
   defaultConfig {
     minSdkVersion 28
