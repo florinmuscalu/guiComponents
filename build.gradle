@@ -4,7 +4,7 @@ buildscript {
     google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:8.1.1'
+    classpath 'com.android.tools.build:gradle:8.5.0'
     classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
   }
 }
@@ -16,6 +16,6 @@ allprojects {
   }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
   delete rootProject.buildDir
 }
