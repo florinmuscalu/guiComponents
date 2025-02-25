@@ -7,12 +7,11 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.review.ReviewManager;
 import com.google.android.play.core.review.ReviewManagerFactory;
-import com.google.android.play.core.tasks.OnCompleteListener;
-import com.google.android.play.core.tasks.Task;
 
 public class AppRate {
     private static boolean AlreadyRan = false;
