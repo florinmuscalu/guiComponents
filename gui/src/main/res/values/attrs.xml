@@ -10,5 +10,6 @@
         <attr name="android:textSize" />
         <attr name="android:textColor" />
         <attr name="overlapPercent" format="integer"/>
+        <attr name="checkedColor" format="color"/>
     </declare-styleable>
 </resources>

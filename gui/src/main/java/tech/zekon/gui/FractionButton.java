@@ -30,6 +30,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
     private OnClickListener _wrappedOnClickListener;
     private OnClickListener _wrappedOnClickHelp = null;
     private int overlapPercent;
+    /** Background tint when checked; defaults to the historical tomato so existing apps are unchanged. */
+    private int checkedColor = Color.rgb(255, 99, 71);
 
     public FractionButton(Context context) {
         this(context, null);
@@ -82,6 +84,7 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         int textColor = ta.getColor(R.styleable.FractionButton_android_textColor, Color.BLACK);
         float textSize = ta.getDimension(R.styleable.FractionButton_android_textSize, 20);
         overlapPercent = ta.getInt(R.styleable.FractionButton_overlapPercent, 20);
+        checkedColor = ta.getColor(R.styleable.FractionButton_checkedColor, Color.rgb(255, 99, 71));
         ta.recycle();
 
         mText.setTextColor(textColor);
@@ -248,8 +251,8 @@ public class FractionButton  extends ConstraintLayout implements View.OnClickLis
         c.setChecked(isChecked);
         try {
             if (isChecked) {
-                getBackground().setColorFilter(Color.rgb(255, 99, 71), PorterDuff.Mode.SRC);
-                button.getBackground().setColorFilter(Color.rgb(255, 110, 81), PorterDuff.Mode.SRC);
+                getBackground().setColorFilter(checkedColor, PorterDuff.Mode.SRC);
+                button.getBackground().setColorFilter(checkedColor, PorterDuff.Mode.SRC);
             }
         } catch (Exception ignored) {}
     }
